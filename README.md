@@ -2,6 +2,25 @@
 
 I use this script to configure new Windows machines. Feel free to use it however you want!
 
+## What it does
+
+Summary of the script `windows_provision.ps1`:
+
+### Installation
+
+- Power user apps (Dropbox, VLC, 7zip, ...)
+- General software development tools (Windows Terminal, VS Code, Python 3, neovim, ...)
+- Frontend development tools (Node.js, Yarn)
+- Backend tools (JDK8, JDK11)
+- Python3 modules (Selenium, joblib, pandas, numpy, ...)
+- Latest Chromedriver (for Web scraping) so that `selenium.ChromeDriver()` works
+- WSL (Windows Subsystem for Linux) and Ubuntu 18.04
+
+### Configuration
+
+- Git: username, email, and useful aliases (unstage, last, ...)
+- PowerShell: sets up profile (optional)
+
 ## Usage
 
 Set the following optional variables in PowerShell:
