@@ -6,7 +6,7 @@ I use this script to configure new Windows machines. Feel free to use it however
 
 Summary of the script `windows_provision.ps1`:
 
-### Installation
+### Installed apps
 
 - Power user apps (Dropbox, VLC, 7zip, ...)
 - General software development tools (Windows Terminal, VS Code, Python 3, neovim, ...)
@@ -16,7 +16,7 @@ Summary of the script `windows_provision.ps1`:
 - Latest Chromedriver (for Web scraping) so that `selenium.ChromeDriver()` works
 - WSL (Windows Subsystem for Linux) and Ubuntu 18.04
 
-### Configuration
+### Configured apps
 
 - Git: username, email, and useful aliases (unstage, last, ...)
 - PowerShell: sets up profile (optional)
