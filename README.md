@@ -8,7 +8,7 @@ Summary of the script `windows_provision.ps1`:
 
 ### Installed apps
 
-- Power user apps (Dropbox, VLC, 7zip, ...)
+- Power user apps (Dropbox, VLC, 7zip, Steam, ...)
 - General software development tools (Windows Terminal, VS Code, Python 3, neovim, ...)
 - Frontend development tools (Node.js, Yarn)
 - Backend tools (JDK8, JDK11)
