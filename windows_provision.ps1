@@ -24,7 +24,7 @@ Invoke-ScriptFromUrl 'https://chocolatey.org/install.ps1'
 choco feature enable -n allowGlobalConfirmation true
 
 # Windows power user apps
-choco install dropbox 7zip vlc resilio-sync-home telegram
+choco install dropbox 7zip vlc resilio-sync-home telegram steam
 # Generally useful developer dependencies
 choco install vscode git python3 neovim microsoft-windows-terminal
 # Frontend-specific dependencies
