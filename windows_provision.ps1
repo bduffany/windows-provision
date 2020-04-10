@@ -25,11 +25,11 @@ choco feature enable -n allowGlobalConfirmation true
 
 # Windows power user apps
 choco install dropbox 7zip vlc resilio-sync-home telegram steam
-# Generally useful developer dependencies
+# Generally useful for development
 choco install vscode git python3 neovim microsoft-windows-terminal
-# Frontend-specific dependencies
+# Frontend-specific
 choco install nodejs yarn
-# Backend-specific deps
+# Backend-specific
 choco install jdk8 jdk11
 
 # Refresh $env:path
