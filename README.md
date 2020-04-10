@@ -21,6 +21,10 @@ Summary of the script `windows_provision.ps1`:
 - Git: username, email, and useful aliases (unstage, last, ...)
 - PowerShell: sets up profile (optional)
 
+## What it doesn't do (yet)
+
+- Install Chrome, Spotify, OBS Studio, Docker
+
 ## Usage
 
 Set the following optional variables in PowerShell:
