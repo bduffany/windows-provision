@@ -35,11 +35,11 @@ $name = "Your name"
 # Email used for git commits.
 $email = "youremail@example.com"
 # URL pointing to your PowerShell profile.
-$powerShellProfileUrl = 'https://gist.github.com/.../raw/your_saved_powershell_profile.ps1'
+$powerShellProfileUrl = 'https://raw.githubusercontent.com/bduffany/windows-provision/master/Microsoft.PowerShell_profile.ps1'
 ```
 
 Then run this command as an administrator in PowerShell:
 
 ```powershell
-$url = "https://gist.github.com/bduffany/ea1a10c4f0dea351d33c742fcfbd00ee/raw/windows_provision.ps1"; Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString("$url"))
+$url = "https://raw.githubusercontent.com/bduffany/windows-provision/master/windows_provision.ps1"; Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString("$url"))
 ```
