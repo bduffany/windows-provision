@@ -36,6 +36,8 @@ $name = "Your name"
 $email = "youremail@example.com"
 # URL pointing to your PowerShell profile.
 $powerShellProfileUrl = 'https://raw.githubusercontent.com/bduffany/windows-provision/master/Microsoft.PowerShell_profile.ps1'
+# Your GitHub username.
+$GitHubUserName = 'github-username'
 ```
 
 Then run this command as an administrator in PowerShell:

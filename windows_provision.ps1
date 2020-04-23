@@ -1,16 +1,12 @@
+#Requires -RunAsAdministrator
+
+$ErrorActionPreference = "Stop"
+
 Function Invoke-ScriptFromUrl {
   Param($Url)
   Set-ExecutionPolicy Bypass -Scope Process -Force
   [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
   iex ((New-Object System.Net.WebClient).DownloadString("$Url"))
-}
-
-Function Download-Code {
-  Param($Url)
-  Param($DestPath)
-  ((New-Object System.Net.WebClient).DownloadString("$Url")) > "$DestPath"
-  # Fix line endings
-  nvim '+%s/\r/\r/g' '+wq' "$DestPath"
 }
 
 # Install chocolatey.
@@ -24,21 +20,36 @@ Invoke-ScriptFromUrl 'https://chocolatey.org/install.ps1'
 choco feature enable -n allowGlobalConfirmation true
 
 # Windows power user apps
-choco install dropbox 7zip vlc resilio-sync-home telegram steam windirstat
+choco install powershell-core notion dropbox 7zip vlc resilio-sync-home telegram steam windirstat
 # Generally useful for development
 choco install vscode git gh python3 neovim microsoft-windows-terminal
 # Frontend-specific
-choco install nodejs yarn
+choco install nodejs yarn firefox
 # Backend-specific
 choco install jdk8 jdk11
 
-# Refresh $env:path
+# Refresh $env:path so the apps installed above can be located.
 Update-SessionEnvironment
 
-# PowerShell profile
-if ($powerShellProfileUrl) {
-  Download-Code "$powerShellProfileUrl" "$profile"
+# More frontend-specific stuff
+yarn global add ts-node typescript eslint
+yarn global add --vs2015 windows-build-tools
+
+# Bootstrapping is more or less complete, and now we have access to more
+# commands. Fancier stuff happens below.
+
+mkdir "$home\code" -ea 0
+cd "$home\code"
+if (!Test-Path -PathType Leaf "windows-provision") {
+  git clone "https://github.com/bduffany/windows-provision"
 }
+# Hard-link PS Core's $profile to the GitHub repo
+mkdir "$home\Documents\PowerShell" -ea 0
+$psCoreProfileUrl = "$home\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+if (Test-Path -PathType Leaf "$psCoreProfileUrl") {
+  rm "$psCoreProfileUrl"
+}
+New-Item -ItemType HardLink -Path "$home\Documents\PowerShell\Microsoft.PowerShell_profile.ps1" -Value "$home\code\windows-provision\Microsoft.PowerShell_profile.ps1"
 
 # Git
 if ($name) {
@@ -58,17 +69,24 @@ git config --global alias.st status
 git config --global credential.helper wincred
 
 # Install useful Python modules
-python3 -m pip install selenium joblib pandas numpy
+python3 -m pip install black numpy pandas selenium joblib
 
-# More risky stuff below
+# More risky stuff below (more likely to fail).
 
 # Install latest Chromedriver
-$LatestChromedriverVersion = ((New-Object System.Net.WebClient).DownloadString("https://chromedriver.storage.googleapis.com/LATEST_RELEASE"))
-$ChromedriverUrl = "https://chromedriver.storage.googleapis.com/$LatestChromedriverVersion/chromedriver_win32.zip"
-$ChromedriverDownloadPath = "$home\Downloads\_chromedriver.zip"
-((New-Object System.Net.WebClient).DownloadFile("$ChromedriverUrl", "$ChromedriverDownloadPath"))
-Expand-Archive "$ChromedriverDownloadPath" -DestinationPath "C:\Windows\system32\"
-Remove-Item "$ChromedriverDownloadPath"
+try {
+  $LatestChromedriverVersion = ((New-Object System.Net.WebClient).DownloadString("https://chromedriver.storage.googleapis.com/LATEST_RELEASE"))
+  $ChromedriverUrl = "https://chromedriver.storage.googleapis.com/$LatestChromedriverVersion/chromedriver_win32.zip"
+  $ChromedriverDownloadPath = "$home\Downloads\_chromedriver.zip"
+  ((New-Object System.Net.WebClient).DownloadFile("$ChromedriverUrl", "$ChromedriverDownloadPath"))
+  mkdir -ea 0 "$home\AppData\Local\ChromeDriver"
+  Expand-Archive "$ChromedriverDownloadPath" -DestinationPath "$home\AppData\Local\ChromeDriver\"
+  Remove-Item "$ChromedriverDownloadPath"
+catch {}
 
 # WSL / Ubuntu
-choco install wsl wsl-ubuntu-1804
+Get-Command wsl || choco install wsl
+Get-Command ubuntu1804 || choco install wsl-ubuntu-1804
+
+# Docker setup (only works on Windows 10 pro / enterprise)
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -ErrorAction continue && choco install docker-desktop
