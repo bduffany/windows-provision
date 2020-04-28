@@ -39,3 +39,10 @@ Function Deploy-Changes($CommitMsg) {
 Function Open-Repo($Name) {
   code -n "$home\code\$Name"
 }
+
+Function New-CommitAndPush($CommitMsg) {
+  git add .
+  git commit -m "$CommitMsg"
+  git push
+}
+
