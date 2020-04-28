@@ -22,7 +22,7 @@ choco feature enable -n allowGlobalConfirmation true
 # Windows power user apps
 choco install powershell-core notion dropbox 7zip vlc resilio-sync-home telegram steam sharex windirstat
 # Generally useful for development
-choco install vscode git gh python3 neovim microsoft-windows-terminal
+choco install vscode git gh python3 neovim microsoft-windows-terminal ag
 # Frontend-specific
 choco install nodejs yarn firefox
 # Backend-specific
