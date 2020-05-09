@@ -43,7 +43,7 @@ yarn global add --vs2015 windows-build-tools
 
 mkdir "$home\code" -ea 0
 cd "$home\code"
-if (!Test-Path -PathType Leaf "windows-provision") {
+if (!(Test-Path -PathType Leaf "windows-provision")) {
   git clone "https://github.com/bduffany/windows-provision"
 }
 # Hard-link PS Core's $profile to the GitHub repo
