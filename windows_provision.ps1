@@ -20,7 +20,7 @@ Invoke-ScriptFromUrl 'https://chocolatey.org/install.ps1'
 . "$profile"
 
 # Make chocolatey always install without confirmation.
-choco feature enable -n allowGlobalConfirmation true
+choco feature enable -n allowGlobalConfirmation
 
 # Windows power user apps
 choco install powershell-core notion dropbox 7zip vlc resilio-sync-home telegram steam sharex windirstat
