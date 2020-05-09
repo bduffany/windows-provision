@@ -9,6 +9,9 @@ Function Invoke-ScriptFromUrl {
   iex ((New-Object System.Net.WebClient).DownloadString("$Url"))
 }
 
+mkdir "$home\Documents\PowerShell" -ea 0
+mkdir "$home\Documents\WindowsPowerShell" -ea 0
+
 # Install chocolatey.
 # First make sure $profile exists so Choco can update it.
 echo "" >> "$profile"
