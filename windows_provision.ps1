@@ -82,11 +82,12 @@ try {
   mkdir -ea 0 "$home\AppData\Local\ChromeDriver"
   Expand-Archive "$ChromedriverDownloadPath" -DestinationPath "$home\AppData\Local\ChromeDriver\"
   Remove-Item "$ChromedriverDownloadPath"
-catch {}
+} catch {}
 
 # WSL / Ubuntu
-Get-Command wsl || choco install wsl
-Get-Command ubuntu1804 || choco install wsl-ubuntu-1804
+# Ubuntu 20.04 is not yet on Chocolatey :/ Install manually for now.
+# if (!(Get-Command wsl)) { choco install wsl }
+# if (!(Get-Command ubuntu2004)) { choco install wsl-ubuntu-2004 }
 
 # Docker setup (only works on Windows 10 pro / enterprise)
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -ErrorAction continue && choco install docker-desktop
