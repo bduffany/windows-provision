@@ -93,4 +93,6 @@ try {
 # if (!(Get-Command ubuntu2004)) { choco install wsl-ubuntu-2004 }
 
 # Docker setup (only works on Windows 10 pro / enterprise)
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -ErrorAction continue && choco install docker-desktop
+if (Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All -ErrorAction continue) {
+  choco install docker-desktop
+}
